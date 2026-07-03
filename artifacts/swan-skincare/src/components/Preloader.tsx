@@ -63,27 +63,29 @@ export default function Preloader({ isLoading, setIsLoading }: PreloaderProps) {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-background overflow-hidden"
+      className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#06070A] overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent mix-blend-multiply" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-rose-200/20 blur-[100px] rounded-full mix-blend-multiply" />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55vw] h-[55vw] rounded-full blur-[120px]"
+        style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.18) 0%, rgba(34,211,238,0.08) 45%, rgba(0,0,0,0) 70%)' }}
+      />
       
       <div className="relative z-10 flex flex-col items-center">
         <img 
           ref={logoRef}
           src={logo} 
           alt="SWAN Logo" 
-          className="w-48 md:w-64 opacity-0 drop-shadow-xl mix-blend-darken"
+          className="w-48 md:w-64 opacity-0 drop-shadow-[0_10px_40px_rgba(139,92,246,0.35)]"
         />
         <div 
           ref={counterRef}
-          className="mt-12 text-sm font-sans tracking-[0.2em] text-primary/80"
+          className="mt-12 text-sm font-sans tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-fuchsia-400"
         >
           0%
         </div>
       </div>
       
-      <div className="absolute bottom-10 text-[10px] font-sans tracking-[0.4em] text-foreground/40 uppercase">
+      <div className="absolute bottom-10 text-[10px] font-sans tracking-[0.4em] text-white/40 uppercase">
         Paris
       </div>
     </div>

@@ -1,0 +1,270 @@
+The current website is still far below the expected premium quality. I do not want small improvements—I want a complete redesign that looks like an award-winning modern eCommerce website.
+
+Hero Section (Highest Priority)
+
+The current hero section looks very basic and does not create a premium first impression.
+
+I want a completely redesigned hero section inspired by premium websites such as Apple, Tesla, Awwwards, and high-end Shopify stores, but designed specifically for our own brand identity, not copied.
+
+Hero Animation
+
+When the website first loads:
+
+The product image should smoothly enter from the top with a premium easing animation.
+The headline should appear from the bottom.
+The subheading should fade in with a slight delay.
+CTA buttons should animate afterward.
+Decorative glowing elements should slowly appear.
+Background gradients should animate subtly.
+Everything should feel smooth, premium, and cinematic.
+
+No sudden movements or cheap animations.
+
+Use professional easing curves and staggered animations.
+
+Example sequence:
+
+Background gradient starts moving.
+Product image slides down from the top.
+Large headline slides upward.
+Description fades in.
+CTA buttons appear.
+Floating particles and glow effects become visible.
+
+The entrance animation should immediately impress visitors.
+
+Typography
+
+The fonts currently look ordinary.
+
+Use premium modern typography throughout the website.
+
+Examples of suitable fonts:
+
+Space Grotesk
+Satoshi
+General Sans
+Clash Display
+Plus Jakarta Sans
+Manrope
+
+Use bold display fonts for headings and elegant fonts for body text.
+
+The typography should look expensive and modern.
+
+Color Theme
+
+The current design has become partially light and looks inconsistent.
+
+I want a rich dark theme with vibrant premium accent colors.
+
+Example palette:
+
+Background:
+
+#06070A
+#0B1020
+#111827
+
+Accent colors:
+
+Purple
+Cyan
+Electric Blue
+Soft Pink
+Emerald
+
+Use beautiful gradients.
+
+Avoid flat colors.
+
+Every section should have depth using:
+
+soft glows
+blurred gradient orbs
+glassmorphism
+subtle shadows
+premium lighting
+
+The website should feel colorful while remaining elegant.
+
+Hero Layout
+
+Create a much more premium composition.
+
+Left side:
+
+Large bold headline
+Strong subheading
+Supporting description
+Primary CTA
+Secondary CTA
+Trust badges
+Customer ratings
+Statistics
+
+Right side:
+
+Large floating product
+Animated glow
+Floating cards
+Background abstract shapes
+Light reflections
+Floating particles
+
+Everything should move slightly using smooth floating animations.
+
+Add Many More Sections
+
+Currently the website ends after only a few sections.
+
+This is unacceptable.
+
+The homepage should be much longer and contain enough content to feel like a premium brand.
+
+Add professional sections such as:
+
+Premium Features
+Why Choose Us
+Product Benefits
+Interactive Product Showcase
+Before vs After
+Customer Testimonials
+Review Cards
+Statistics
+FAQ
+Comparison Table
+How It Works
+Ingredients / Technology
+Brand Story
+Mission
+Awards / Certifications
+Media Mentions
+Featured Logos
+Trust Indicators
+Guarantee Section
+Shipping Information
+Newsletter Section
+Instagram Gallery
+Call to Action Banner
+Sticky Buy Section
+Footer with Premium Layout
+
+Every section should have its own animations.
+
+Animations
+
+Current animations have noticeable glitches.
+
+Fix every animation.
+
+Animations should remain smooth even during scrolling.
+
+Use professional animation libraries if necessary.
+
+Implement:
+
+Scroll reveal
+Fade-up
+Fade-left
+Fade-right
+Zoom-in
+Floating animations
+Hover lift
+Magnetic buttons
+Cursor interactions
+Glow transitions
+Gradient movement
+Card hover effects
+Smooth page transitions
+Image parallax
+Glass reflections
+
+No lag.
+
+No flickering.
+
+No jumping.
+
+Everything should be GPU-accelerated.
+
+Mobile Version (Needs Complete Redesign)
+
+The current mobile version is extremely basic and provides a poor user experience.
+
+Do not simply stack desktop sections.
+
+Create a dedicated mobile layout.
+
+Requirements:
+
+Proper spacing
+Better typography scaling
+Larger touch targets
+Optimized image sizes
+Smooth animations
+Responsive cards
+Premium mobile navigation
+Sticky mobile CTA
+Beautiful mobile hero
+Full-width buttons
+Optimized loading
+Faster performance
+
+The mobile experience should feel like a premium native app.
+
+Responsiveness
+
+Ensure perfect responsiveness across:
+
+Mobile
+Tablet
+Laptop
+Desktop
+Ultrawide screens
+
+Nothing should overflow or break.
+
+Every section should scale perfectly.
+
+Performance
+
+Maintain excellent performance while adding premium effects.
+
+Optimize:
+
+Lazy loading
+Image optimization
+Animation performance
+Bundle size
+Lighthouse score
+
+Target:
+
+90+ Performance
+95+ Accessibility
+95+ Best Practices
+UI Quality
+
+Every component should look premium.
+
+Upgrade:
+
+Buttons
+Cards
+Inputs
+Icons
+Shadows
+Borders
+Hover states
+Loading states
+
+Use rounded corners, glassmorphism, premium gradients, and subtle glow effects.
+
+Overall Goal
+
+The final website should not resemble a standard template.
+
+It should immediately look like a high-end, award-winning website with polished animations, premium typography, immersive visuals, and a luxurious user experience. Visitors should feel impressed the moment the page loads.
+
+Do not make minor edits to the existing design. Perform a complete redesign while preserving our brand identity and content. The result should be comparable in quality to top Awwwards-winning websites and premium Shopify stores, with flawless desktop and mobile responsiveness.

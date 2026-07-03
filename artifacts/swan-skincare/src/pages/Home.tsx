@@ -8,10 +8,11 @@ import Hero from '@/components/Hero';
 import Story from '@/components/Story';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import Benefits from '@/components/Benefits';
+import Ingredients from '@/components/Ingredients';
+import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import SmoothScroll from '@/components/SmoothScroll';
-import TravelingBottle from '@/components/TravelingBottle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,7 +31,7 @@ export default function Home() {
 
   return (
     <SmoothScroll>
-      <div className="bg-background min-h-screen text-foreground relative overflow-hidden hide-cursor" ref={mainRef}>
+      <div className="bg-[#06070A] min-h-screen text-white relative overflow-hidden hide-cursor selection:bg-cyan-500/30 selection:text-white" ref={mainRef}>
         <CustomCursor />
         <Preloader isLoading={isLoading} setIsLoading={setIsLoading} />
         
@@ -42,11 +43,12 @@ export default function Home() {
           <CartDrawer />
           
           <main>
-            <TravelingBottle />
-            <Hero />
-            <Story />
-            <FeaturedProducts />
+            <Hero isLoading={isLoading} />
             <Benefits />
+            <FeaturedProducts />
+            <Story />
+            <Ingredients />
+            <FAQ />
           </main>
           
           <Footer />
