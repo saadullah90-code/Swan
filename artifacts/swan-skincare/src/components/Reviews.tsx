@@ -62,7 +62,7 @@ export default function Reviews() {
           
           <div className="w-full md:w-1/3 text-center md:text-left">
             <div className="flex justify-center md:justify-start mb-10">
-              <div data-bottle-slot="3" className="w-28 sm:w-36 aspect-[0.72]" />
+              <div data-bottle-slot="4" className="w-28 sm:w-36 aspect-[0.72]" />
             </div>
             <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-[hsl(var(--luxury))] font-medium mb-4 block">Testimonials</span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-semibold mb-6">Loved by radiant faces.</h2>

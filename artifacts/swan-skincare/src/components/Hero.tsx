@@ -68,7 +68,7 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.from('[data-hero-bgword]', { opacity: 0, y: 60, duration: 1.1 }, 0)
+      tl.from('[data-hero-bgword]', { opacity: 0, y: 150, duration: 1.3, ease: 'power4.out' }, 0)
         .from('[data-hero-line]', { yPercent: 120, opacity: 0, duration: 1, stagger: 0.12 }, 0.15)
         .from('[data-hero-sub]', { y: 50, opacity: 0, duration: 0.9, stagger: 0.1 }, 0.5)
         .from('[data-hero-cta]', { y: 40, opacity: 0, duration: 0.8, stagger: 0.1 }, 0.7)

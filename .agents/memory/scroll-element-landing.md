@@ -9,9 +9,14 @@ description: How to make a persistent fixed element travel on scroll and land pr
 
 **Why:** Percentage-based landing is fragile and usually wrong because (1) the target card can be offset (e.g. a raised middle card) and reflows to a vertical stack on mobile, and (2) any *pinned* section elsewhere on the page (GSAP `pin`) injects extra synthetic scroll distance, so a body-scroll-fraction timeline reaches its "landed" keyframe at the wrong moment. Measuring the target live makes landing accuracy independent of pinning, resize, and breakpoint.
 
+**Prefer `gsap.ticker.add` over one scrubbed ScrollTrigger for multi-slot travel.** For an element that hops between MANY slots down the page, drive placement from a per-frame `gsap.ticker` callback (Lenis runs on the same ticker, so `window.scrollY` is valid). Each frame: read every slot's live rect, compute each slot's "anchor" scrollY (`rect.top + scrollY + rect.height/2 - innerHeight/2` = where that slot is vertically centered), find which two anchors the current scrollY is between, and lerp position/scale between those two slots' live rects. Past the last anchor, dock to the last slot's live rect so it scrolls away with the page (never floats over the footer).
+
+**Why (multi-slot):** a single scrubbed ScrollTrigger with global progress mapped evenly across segments (`p * segs`) assumes equal section spacing. It doesn't hold — the element races ahead/lags the real sections (looks like sticking/stutter) and freezes pinned over the footer at progress 1. Anchoring every frame to real slot geometry fixes both and needs no `ScrollTrigger.refresh` on resize.
+
 **How to apply:**
-- Mark the target slot with a data attribute (e.g. `[data-bottle-slot]`) and render it empty — the traveling element *is* the slot's content once landed.
-- Keep the element `fixed; top:0; left:0; xPercent:-50; yPercent:-50` and drive its center with `x`/`y` (px) each frame.
-- Phase-split by scroll position: early phases can use viewport anchors; the final/landing phase converges toward the live slot center and, once past it, simply tracks the slot so the element scrolls away glued to the card.
-- Any companion visuals (glow/shadow) must be written by the **same** place() call so they can't detach.
-- Recompute on `onRefresh` too, and wrap in `gsap.context()` with cleanup.
+- Mark the target slot with a data attribute (e.g. `[data-bottle-slot]`) and render it empty — the traveling element *is* the slot's content once landed. No dashed border / placeholder image (it shows when the element is elsewhere).
+- Keep the element `fixed; top:0; left:0` and drive its center via transform each frame.
+- Every slot marker MUST stay rendered on every breakpoint. A `hidden` slot collapses its rect to 0 and the element scales toward 0 — position it (e.g. absolute left, smaller on mobile) instead of hiding it.
+- Keep competing transforms on SEPARATE nested wrappers: outer(translate+scale, ticker) > entrance(one-time) > rotator(rotate, ticker) > float(infinite y). Two animators writing one element's transform fight each other.
+- Any companion visuals (glow/shadow) must be written by the **same** place() call (or nested inside the driven element) so they can't detach.
+- Cleanup: `gsap.ticker.remove(tick)`, revert the `gsap.context()`, drop listeners/timeouts on unmount, or a per-frame callback leaks across route changes.

@@ -102,8 +102,8 @@ export default function FeaturedProducts() {
 
                 {i === 1 ? (
                   // The traveling bottle lands here.
-                  <div data-bottle-slot="1" className="relative z-10 h-full w-full flex items-center justify-center">
-                    <div className="w-[70%] aspect-[0.72] rounded-[2rem] border border-dashed border-foreground/10" />
+                  <div className="relative z-10 h-full w-full flex items-center justify-center">
+                    <div data-bottle-slot="1" className="w-[64%] aspect-[0.72]" />
                   </div>
                 ) : (
                   <img

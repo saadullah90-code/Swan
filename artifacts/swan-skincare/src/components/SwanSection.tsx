@@ -65,6 +65,11 @@ export default function SwanSection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] rounded-full bg-[hsl(var(--c-rose)/0.10)] blur-[140px]" />
       </div>
 
+      {/* The traveling bottle rests here — on the left. Must stay present on all breakpoints. */}
+      <div className="absolute left-3 sm:left-8 lg:left-20 top-[18%] sm:top-1/2 sm:-translate-y-1/2 z-20 pointer-events-none">
+        <div data-bottle-slot="2" className="w-24 sm:w-36 lg:w-44 aspect-[0.72]" />
+      </div>
+
       {/* Giant faded word */}
       <div
         data-swan-word

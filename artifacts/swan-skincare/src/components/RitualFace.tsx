@@ -101,7 +101,7 @@ export default function RitualFace() {
 
           <div className="absolute -left-4 md:-left-8 bottom-10 glass rounded-3xl p-4 luxury-shadow flex flex-col items-center gap-2">
             <div
-              data-bottle-slot="2"
+              data-bottle-slot="3"
               className="w-24 sm:w-28 aspect-[0.72]"
             />
             <span className="text-[10px] uppercase tracking-widest font-semibold text-foreground/70">
