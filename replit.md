@@ -22,15 +22,23 @@ An ultra-premium, cinematic single-page marketing website for the SWAN Skincare 
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/swan-skincare/src/pages/Home.tsx` — page composition + preloader `isLoading` state (order: Preloader, Header, CartDrawer, TravelingBottle, Hero, Story, FeaturedProducts, Benefits, Footer).
+- `artifacts/swan-skincare/src/components/` — one file per section. Key ones: `Preloader`, `Hero`, `Story` (pinned philosophy, `id="philosophy"`), `FeaturedProducts` (`id="shop"`, 3 product cards + product data), `TravelingBottle` (the persistent hero→card bottle), `Benefits` (marquee), `Footer` (`id="contact"`), `CustomCursor` (magnetic), `SmoothScroll` (Lenis), `Header` (shrink-on-scroll).
+- `artifacts/swan-skincare/src/index.css` — theme tokens as HSL component triples (e.g. `--primary: 345 35% 65%`), consumed via `hsl(var(--primary) / <alpha>)`. Font `@import` must stay line 1.
+- `artifacts/swan-skincare/src/store/useCartStore.ts` — client-side zustand cart + `Product` type.
+- Product images/logo imported via the `@assets` alias (see `vite.config.ts`).
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- **Traveling bottle is element-driven, not viewport-percentage-driven.** `TravelingBottle` is a `position: fixed` image whose center is set each scroll frame; the landing phase measures the live `getBoundingClientRect()` of `[data-bottle-slot]` (the empty middle product-card image area). Reading the slot live every frame makes the landing immune to Story's pinning and to resize — do NOT revert to animating to fixed `top/left` percentages.
+- The glow div shares the exact same computed transform as the bottle (same `place()` call) so it can never detach.
+- The middle product card intentionally renders an empty `[data-bottle-slot]` (no `<img>`); the traveling Retinol bottle IS that card's product image once it lands.
+- Nav anchors map to real section ids only: Shop→`#shop`, Philosophy→`#philosophy`, Contact→`#contact`. There is deliberately no Journal/press section.
+- Smooth scroll uses Lenis; all GSAP work is wrapped in `gsap.context()` and reverted on unmount.
 
 ## Product
 
-Single-page, frontend-only luxury marketing site (artifact `swan-skincare`, previewPath `/`). Sections: cinematic preloader, hero, story/philosophy, horizontal-scroll headline, product shop, ingredients, ritual, press/journal, footer. Client-side cart (zustand) with a slide-out drawer — no real checkout or persistence. Three real products, all 30ml: Hyaluronic Acid Serum ($68, blue), Vitamin C Serum ($72, pink), Retinol Serum ($76, rose). Palette is soft blush pink / cream / rose gold; footer reads "Developed by BranX". Fonts: Playfair Display (serif) + Outfit (sans).
+Single-page, frontend-only luxury marketing site (artifact `swan-skincare`, previewPath `/`). Sections: cinematic preloader → off-centered hero → pinned story/philosophy → product collection (with the traveling bottle landing into the middle card) → marquee → footer. The signature interaction is the single hero Retinol bottle that persists and travels down the page into the middle product card. Client-side cart (zustand) with a slide-out drawer — no real checkout or persistence. Three real products, all 30ml: Hyaluronic Acid Serum ($68, blue), Vitamin C Serum ($72, pink), Retinol Serum ($76, rose). Palette is soft blush pink / cream / rose gold; footer reads "Developed by BranX". Fonts: Playfair Display (serif) + Outfit (sans).
 
 ## User preferences
 

@@ -1,66 +1,91 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SplitType from 'split-type';
 import logo from '@assets/ChatGPT_Image_Jul_3,_2026,_04_16_42_PM_1783077418756.png';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface PreloaderProps {
   isLoading: boolean;
+  setIsLoading: (val: boolean) => void;
 }
 
-export default function Preloader({ isLoading }: PreloaderProps) {
-  return (
-    <AnimatePresence>
-      {isLoading && (
-        <motion.div
-          className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#fdfafb] glass"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, filter: 'blur(10px)' }}
-          transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-            transition={{ duration: 1.5, ease: 'easeOut' }}
-            className="relative"
-          >
-            <img 
-              src={logo} 
-              alt="SWAN Skincare" 
-              className="w-48 md:w-64 h-auto object-contain drop-shadow-2xl"
-            />
-            <motion.div 
-              className="absolute -inset-10 bg-primary/20 blur-3xl rounded-full -z-10"
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </motion.div>
+export default function Preloader({ isLoading, setIsLoading }: PreloaderProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (!isLoading) return;
+
+    const ctx = gsap.context(() => {
+      // Counter animation
+      const counter = { value: 0 };
+      gsap.to(counter, {
+        value: 100,
+        duration: 2,
+        ease: 'power3.inOut',
+        onUpdate: () => {
+          if (counterRef.current) {
+            counterRef.current.textContent = Math.round(counter.value).toString() + '%';
+          }
+        },
+        onComplete: () => {
+          const tl = gsap.timeline({
+            onComplete: () => {
+              setIsLoading(false);
+            }
+          });
           
-          <motion.div 
-            className="absolute bottom-20 flex flex-col items-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
-          >
-            <div className="w-[1px] h-12 bg-gradient-to-b from-transparent via-foreground/20 to-transparent relative overflow-hidden">
-              <motion.div
-                className="absolute inset-0 w-full h-full bg-foreground/50"
-                initial={{ y: '-100%' }}
-                animate={{ y: '100%' }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-              />
-            </div>
-            <span className="text-xs tracking-[0.3em] uppercase text-foreground/50 font-sans">
-              Discover Purity
-            </span>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          tl.to(counterRef.current, { opacity: 0, duration: 0.5 })
+            .to(logoRef.current, { scale: 1.1, opacity: 0, duration: 0.8, ease: 'power2.inOut' }, "<")
+            .to(containerRef.current, { 
+              yPercent: -100, 
+              duration: 1.2, 
+              ease: 'power4.inOut' 
+            }, "-=0.4");
+        }
+      });
+
+      // Logo pulse
+      gsap.fromTo(logoRef.current, 
+        { opacity: 0, scale: 0.9, filter: 'blur(10px)' },
+        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [isLoading, setIsLoading]);
+
+  if (!isLoading) return null;
+
+  return (
+    <div 
+      ref={containerRef}
+      className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-background overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent mix-blend-multiply" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-rose-200/20 blur-[100px] rounded-full mix-blend-multiply" />
+      
+      <div className="relative z-10 flex flex-col items-center">
+        <img 
+          ref={logoRef}
+          src={logo} 
+          alt="SWAN Logo" 
+          className="w-48 md:w-64 opacity-0 drop-shadow-xl mix-blend-darken"
+        />
+        <div 
+          ref={counterRef}
+          className="mt-12 text-sm font-sans tracking-[0.2em] text-primary/80"
+        >
+          0%
+        </div>
+      </div>
+      
+      <div className="absolute bottom-10 text-[10px] font-sans tracking-[0.4em] text-foreground/40 uppercase">
+        Paris
+      </div>
+    </div>
   );
 }

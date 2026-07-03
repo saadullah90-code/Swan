@@ -1,0 +1,491 @@
+The current implementation is completely unacceptable and does not match the requirements.
+
+Do NOT improve the current design.
+
+Do NOT keep the existing Hero.
+
+Do NOT reuse the existing layout.
+
+Delete the current homepage layout and redesign everything from scratch.
+
+The goal is an Awwwards-quality cinematic skincare experience, not a standard ecommerce landing page.
+
+Biggest Problems In Current Version
+
+The current Hero is generic.
+
+Everything is centered.
+
+There is almost no visual hierarchy.
+
+There is too much unnecessary text.
+
+Sections overlap.
+
+Animations are glitchy.
+
+Scroll animations are broken.
+
+The page feels static.
+
+It does not tell a story.
+
+It looks like a template instead of a luxury skincare website.
+
+This entire experience must be redesigned.
+
+Hero Must Look Like This
+
+Use the attached green reference only for layout composition, not colors.
+
+I want the same premium composition style.
+
+Large typography in background.
+
+Floating cards.
+
+Floating product.
+
+Depth.
+
+Multiple layers.
+
+Huge cinematic feeling.
+
+The difference is
+
+Use my skincare branding.
+
+Use soft luxury pink.
+
+Cream.
+
+Rose gold.
+
+White.
+
+Glassmorphism.
+
+Luxury skincare environment.
+
+Do NOT copy the green colors.
+
+Only copy the premium composition style.
+
+Hero Layout
+
+Full viewport.
+
+100vh.
+
+No centered boring layout.
+
+Large text starts partially outside viewport.
+
+Some typography should extend beyond screen edges.
+
+Product should NOT stay in center.
+
+Product should be slightly offset.
+
+Floating.
+
+Premium.
+
+Around product
+
+Floating skincare ingredients
+
+Glow
+
+Glass reflections
+
+Soft particles
+
+Light rays
+
+Blur circles
+
+Luxury bubbles
+
+Very subtle movement.
+
+Everything should feel alive.
+
+Hero Entrance Animation
+
+Website opens.
+
+Luxury preloader.
+
+Logo reveal.
+
+Loading percentage.
+
+Glow.
+
+After preloader
+
+Background fades in.
+
+Huge text slides upward.
+
+Letters reveal individually.
+
+Product drops slowly from above.
+
+Cards fade in one by one.
+
+Floating ingredients appear.
+
+Mouse movement adds slight parallax.
+
+Everything happens sequentially.
+
+Like Apple event animations.
+
+THIS IS THE MOST IMPORTANT FEATURE
+
+The Hero Product MUST travel through the website.
+
+Do NOT replace it.
+
+Do NOT hide it.
+
+Do NOT fade it.
+
+The exact product from Hero must remain alive.
+
+As user scrolls
+
+The bottle slowly moves downward.
+
+Using GSAP ScrollTrigger.
+
+The bottle travels through the page.
+
+When reaching Product Cards section
+
+The bottle should animate directly into the middle card.
+
+Like it is physically entering the card.
+
+No jump cuts.
+
+No replacing images.
+
+Continuous movement.
+
+This storytelling animation is mandatory.
+
+Product Storytelling
+
+After Hero
+
+Pin the Hero.
+
+Start storytelling.
+
+Large typography.
+
+Minimal text.
+
+Lots of white space.
+
+Luxury spacing.
+
+Every scroll should reveal something new.
+
+Use GSAP timeline.
+
+Pinned sections.
+
+Image masking.
+
+Blur reveals.
+
+Scale.
+
+Rotation.
+
+Horizontal movement.
+
+Clip path animations.
+
+Split text animations.
+
+Product Cards
+
+When Hero bottle reaches cards
+
+There should already be
+
+Left card
+
+Middle card
+
+Right card
+
+The Hero bottle becomes the middle card.
+
+This transition must feel magical.
+
+Cards should
+
+Float
+
+Glow
+
+Tilt on hover
+
+Glassmorphism
+
+Luxury shadows
+
+Micro interactions
+
+Premium hover
+
+Absolutely NO Long Paragraphs
+
+Luxury websites don't dump text.
+
+Maximum
+
+One heading.
+
+One short sentence.
+
+One CTA.
+
+That's it.
+
+The website must breathe.
+
+Lots of whitespace.
+
+Large typography.
+
+Homepage Structure
+
+Preloader
+
+↓
+
+Floating Glass Header
+
+↓
+
+Cinematic Hero
+
+↓
+
+Pinned Storytelling
+
+↓
+
+Hero Product Travels Down
+
+↓
+
+Product Morphs Into Middle Card
+
+↓
+
+Three Featured Products
+
+↓
+
+Horizontal Rolling Text
+
+↓
+
+Benefits Section
+
+↓
+
+Ingredients Section
+
+↓
+
+Luxury Product Showcase
+
+↓
+
+Testimonials
+
+↓
+
+Scrolling Marquee
+
+↓
+
+Before After
+
+↓
+
+FAQs
+
+↓
+
+Newsletter
+
+↓
+
+Luxury Footer
+
+Header
+
+Floating.
+
+Glass.
+
+Blur.
+
+Transparent.
+
+Shrink on scroll.
+
+Logo center.
+
+Navigation left.
+
+CTA right.
+
+Luxury hover.
+
+Cursor
+
+Custom cursor.
+
+Magnetic.
+
+Glow.
+
+Expand on hover.
+
+Shrink on click.
+
+Blend mode.
+
+Buttons
+
+Glass.
+
+Gloss.
+
+Animated border.
+
+Magnetic.
+
+Hover lift.
+
+Glow.
+
+Reflection.
+
+Never use default buttons.
+
+Images
+
+Images must never randomly overlap.
+
+No broken spacing.
+
+No clipping.
+
+No stretched images.
+
+Always use next/image.
+
+Animations
+
+Every section must have GSAP.
+
+Not only fade.
+
+Use
+
+SplitType
+
+ScrollTrigger
+
+Pin
+
+Parallax
+
+Scale
+
+Blur
+
+Rotation
+
+Mask reveal
+
+ClipPath
+
+Horizontal scroll
+
+Card stacking
+
+Reveal
+
+Image zoom
+
+Text reveal
+
+Rolling text
+
+Marquee
+
+Floating
+
+Mouse parallax
+
+Glass reflections
+
+Performance
+
+Animations must remain at 60fps.
+
+No glitches.
+
+No shaking.
+
+No flickering.
+
+No overlapping.
+
+No scroll lag.
+
+No hydration errors.
+
+No console warnings.
+
+No layout shift.
+
+No horizontal scrollbar.
+
+No overflow.
+
+Mobile
+
+This website must NOT simply shrink desktop.
+
+Completely redesign spacing.
+
+Recalculate animation values.
+
+Touch-friendly interactions.
+
+Everything buttery smooth.
+
+Final Design Goal
+
+I want visitors to think this website was designed by an agency that charges $10,000–$20,000 for a homepage.
+
+The result should look comparable to Apple, Dior Beauty, Aesop, or premium Awwwards-winning websites.
+
+Every pixel must feel intentional.
+
+Do not generate a template. Build a cinematic luxury experience from scratch.

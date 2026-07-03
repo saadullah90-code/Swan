@@ -1,22 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
-import heroBottle from '@assets/ChatGPT_Image_Jul_3,_2026,_03_41_09_PM-Photoroom_1783077232628.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
-  const bottleRef = useRef<HTMLImageElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current || !bottleRef.current) return undefined;
+    if (!containerRef.current || !textRef.current) return;
+    
     const ctx = gsap.context(() => {
-      gsap.to(bottleRef.current, {
-        y: 200,
+      // Parallax on the huge background text
+      gsap.to(textRef.current, {
+        xPercent: -20,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -25,106 +23,58 @@ export default function Hero() {
           scrub: true,
         },
       });
-
-      gsap.to(glowRef.current, {
-        opacity: 0,
-        scale: 1.5,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
     }, containerRef);
+    
     return () => ctx.revert();
   }, []);
 
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full h-[100svh] min-h-[700px] flex items-center justify-center overflow-hidden bg-[#fdfafb]"
+      className="relative w-full h-[100svh] min-h-[800px] flex items-center justify-start overflow-hidden bg-background"
     >
-      {/* Soft background environment */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[40vw] h-[40vw] rounded-full bg-primary/10 blur-[100px] mix-blend-multiply" />
-        <div className="absolute bottom-1/4 right-1/4 w-[30vw] h-[30vw] rounded-full bg-rose-200/20 blur-[100px] mix-blend-multiply" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.8)_0%,rgba(253,250,251,1)_100%)]" />
+      {/* Background Ambience */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-[10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-primary/20 blur-[120px] mix-blend-multiply" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-rose-200/30 blur-[150px] mix-blend-multiply" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center">
-        <div className="overflow-hidden mb-6">
-          <motion.div
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 2.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-xs md:text-sm uppercase tracking-[0.4em] text-foreground/60 text-center"
-          >
-            The Art of Radiance
-          </motion.div>
-        </div>
+      {/* Huge Bleeding Typography */}
+      <h1 
+        ref={textRef}
+        className="absolute top-[40%] -translate-y-1/2 left-[-5%] text-[18vw] font-serif text-foreground/5 leading-none whitespace-nowrap z-10 pointer-events-none select-none"
+      >
+        SWAN SKINCARE
+      </h1>
 
-        <h1 
-          ref={textRef}
-          className="text-6xl md:text-8xl lg:text-9xl font-serif text-center text-foreground leading-[0.9] tracking-tight relative z-20 mix-blend-darken"
-        >
-          <motion.span
-            initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
-            animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-            transition={{ duration: 1.5, delay: 2.5, ease: 'easeOut' }}
-            className="block"
-          >
-            Luminous
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, filter: 'blur(10px)', y: 20 }}
-            animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-            transition={{ duration: 1.5, delay: 2.7, ease: 'easeOut' }}
-            className="block italic font-light text-primary/80 ml-12 md:ml-32"
-          >
-            Skin
-          </motion.span>
-        </h1>
-
-        {/* Hero Product Bottle */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[300px] md:max-w-[400px] pointer-events-none mt-16 md:mt-24">
-          <motion.div 
-            ref={glowRef}
-            className="absolute inset-0 bg-rose-300/30 blur-[60px] rounded-full scale-150"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2, delay: 3 }}
-          />
-          <motion.img
-            ref={bottleRef}
-            src={heroBottle}
-            alt="SWAN Retinol Serum"
-            className="w-full h-auto drop-shadow-2xl relative z-30"
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ 
-              duration: 2, 
-              delay: 2.8, 
-              ease: [0.16, 1, 0.3, 1] 
-            }}
-          />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 3.5 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer pointer-events-auto"
-        >
-          <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/40">Scroll to explore</span>
-          <div className="w-[1px] h-12 bg-foreground/10 relative overflow-hidden">
-            <motion.div
-              className="absolute inset-0 bg-foreground/50 w-full h-full"
-              animate={{ y: ['-100%', '100%'] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-            />
+      <div className="container mx-auto px-6 md:px-12 relative z-20 flex flex-col justify-center h-full">
+        <div className="max-w-xl glass-heavy p-10 md:p-14 rounded-[2rem] luxury-shadow">
+          <div className="text-xs uppercase tracking-[0.4em] text-primary mb-6 font-medium">
+            L'Essence de Beauté
           </div>
-        </motion.div>
+          <h2 className="text-5xl md:text-7xl font-serif text-foreground leading-[1.1] mb-8">
+            Luminous,<br />
+            <span className="italic font-light text-primary">Weightless</span><br />
+            Luxury.
+          </h2>
+          <p className="text-foreground/70 font-light text-lg mb-10 leading-relaxed max-w-sm">
+            Jewel-like glass serums formulated in Paris. Your daily ritual, elevated to quiet luxury.
+          </p>
+          <button className="relative px-8 py-4 bg-background/50 border border-foreground/10 backdrop-blur-md rounded-full text-sm uppercase tracking-widest hover:bg-foreground hover:text-background transition-all duration-500 overflow-hidden group">
+            <span className="relative z-10">Discover the Collection</span>
+          </button>
+        </div>
+      </div>
+      
+      {/* Floating glass cards (composition elements) */}
+      <div className="absolute top-[20%] right-[10%] w-64 glass p-6 rounded-3xl luxury-shadow z-20 hidden lg:block">
+        <div className="text-[10px] uppercase tracking-widest text-primary mb-2">Formulation</div>
+        <div className="font-serif text-2xl">Micro-encapsulated</div>
+      </div>
+      
+      <div className="absolute bottom-[20%] left-[50%] w-72 glass p-6 rounded-3xl luxury-shadow z-20 hidden md:block">
+        <div className="text-[10px] uppercase tracking-widest text-primary mb-2">Purity</div>
+        <div className="font-serif text-2xl">0% Synthetic Fragrance</div>
       </div>
     </section>
   );

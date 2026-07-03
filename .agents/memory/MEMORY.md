@@ -1,0 +1,1 @@
+- [Scroll-linked element travel/landing (GSAP)](scroll-element-landing.md) — to make a fixed element "land" into a normal-flow slot, measure the slot's live rect each frame; never animate to fixed viewport percentages.
