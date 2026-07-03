@@ -9,6 +9,12 @@ export interface Product {
   image: string;
   size: string;
   colorType: 'blue' | 'pink' | 'rose';
+  /* Rich detail used on the product page (optional) */
+  tagline?: string;
+  longDescription?: string;
+  benefits?: string[];
+  howToUse?: string[];
+  keyIngredients?: { name: string; desc: string }[];
 }
 
 interface CartItem extends Product {

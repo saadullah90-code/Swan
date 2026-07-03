@@ -72,6 +72,10 @@
   --c-sky: 200 85% 62%;
   --c-mint: 158 62% 52%;
   --c-amber: 40 95% 62%;
+
+  /* solid luxury tones for headlines & accents */
+  --luxury: 344 60% 34%;   /* deep rose-wine */
+  --gold: 36 48% 46%;      /* muted champagne gold */
 }
 
 @layer base {
@@ -128,6 +132,40 @@
     radial-gradient(45% 45% at 85% 15%, hsl(var(--c-violet) / 0.16) 0%, transparent 70%),
     radial-gradient(50% 50% at 75% 85%, hsl(var(--c-peach) / 0.18) 0%, transparent 70%),
     radial-gradient(40% 40% at 25% 90%, hsl(var(--c-sky) / 0.14) 0%, transparent 70%);
+}
+
+.text-luxury {
+  color: hsl(var(--luxury));
+}
+.text-gold {
+  color: hsl(var(--gold));
+}
+
+/* Glossy luxury header */
+.glossy {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 255, 255, 0.62) 100%
+  );
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 10px 40px -8px rgba(180, 120, 150, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Flying add-to-cart clone */
+.fly-clone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 250;
+  pointer-events: none;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 34px rgba(180, 120, 150, 0.4));
+  will-change: transform, opacity;
 }
 
 .gradient-border {

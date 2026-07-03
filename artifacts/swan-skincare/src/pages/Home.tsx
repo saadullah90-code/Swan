@@ -13,6 +13,9 @@ import Reviews from '@/components/Reviews';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
 import SmoothScroll from '@/components/SmoothScroll';
+import TravelingBottle from '@/components/TravelingBottle';
+import SwanSection from '@/components/SwanSection';
+import RitualFace from '@/components/RitualFace';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,12 +44,15 @@ export default function Home() {
         >
           <Header />
           <CartDrawer />
+          <TravelingBottle isLoading={isLoading} />
           
           <main>
             <Hero isLoading={isLoading} />
             <Story />
             <FeaturedProducts />
+            <SwanSection />
             <Routine />
+            <RitualFace />
             <Benefits />
             <Reviews />
           </main>

@@ -1,0 +1,14 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "mlBhq20EI-n5c0_EUDT1i"
+uri = "file://attached_assets/generated_images/lady_serum_ritual.png"
+type = "image"
+title = "lady applying serum ritual"
+
+[[generated]]
+id = "fj_fNUarKPdtjPiYzZMXc"
+uri = "file://attached_assets/generated_images/swan_line_art.png"
+type = "image"
+title = "elegant luxury swan illustration"

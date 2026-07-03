@@ -61,7 +61,10 @@ export default function Reviews() {
         <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-center">
           
           <div className="w-full md:w-1/3 text-center md:text-left">
-            <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary font-medium mb-4 block">Testimonials</span>
+            <div className="flex justify-center md:justify-start mb-10">
+              <div data-bottle-slot="3" className="w-28 sm:w-36 aspect-[0.72]" />
+            </div>
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-[hsl(var(--luxury))] font-medium mb-4 block">Testimonials</span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-display font-semibold mb-6">Loved by radiant faces.</h2>
             <p className="text-base font-light text-foreground/70 mb-8 max-w-sm mx-auto md:mx-0">
               Don't just take our word for it. Discover what our community has to say about the SWAN experience.

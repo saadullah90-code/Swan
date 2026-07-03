@@ -2,21 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Droplet, Sun, Sparkles, Plus, ArrowDown, Star } from 'lucide-react';
-import { useCartStore, Product } from '@/store/useCartStore';
-import retinolBottle from '@assets/ChatGPT_Image_Jul_3,_2026,_03_41_09_PM-Photoroom_1783077232628.png';
+import { useCartStore } from '@/store/useCartStore';
+import { getProduct } from '@/data/products';
+import { flyToCart } from '@/lib/flyToCart';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const retinolProduct: Product = {
-  id: 'retinol-serum',
-  name: 'Retinol Serum',
-  subtitle: 'Skin Renewal',
-  description: 'Micro-encapsulated overnight renewal.',
-  price: 76,
-  size: '30ml',
-  image: retinolBottle,
-  colorType: 'rose',
-};
+const retinolProduct = getProduct('retinol-serum')!;
 
 const callouts = [
   { label: 'Deep hydration', pos: 'top-[14%] left-[6%] md:left-[12%]', color: 'text-[hsl(var(--c-sky))]' },
@@ -34,8 +26,6 @@ const ingredients = [
 export default function Hero({ isLoading }: { isLoading: boolean }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const bgWordRef = useRef<HTMLDivElement>(null);
-  const productRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
   const hasEnteredRef = useRef(false);
   const addItem = useCartStore((s) => s.addItem);
 
@@ -44,18 +34,19 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
   };
 
   const addBestSeller = () => {
-    addItem(retinolProduct);
+    const slot = document.querySelector('[data-bottle-slot="0"]');
+    if (slot) flyToCart(retinolProduct.image, slot.getBoundingClientRect());
+    window.setTimeout(() => addItem(retinolProduct), 750);
   };
 
+  // Parallax on the giant background word.
   useEffect(() => {
     if (!containerRef.current) return;
-
     const ctx = gsap.context(() => {
-      // Subtle parallax on the giant background word only.
       if (bgWordRef.current) {
         gsap.to(bgWordRef.current, {
-          xPercent: -8,
-          yPercent: -10,
+          xPercent: -6,
+          yPercent: -14,
           ease: 'none',
           scrollTrigger: {
             trigger: containerRef.current,
@@ -66,58 +57,24 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
         });
       }
     }, containerRef);
-
     return () => ctx.revert();
   }, []);
 
-  // Entrance animation, triggered when the preloader releases.
+  // Entrance — everything rises up from below once the preloader releases.
   useEffect(() => {
     if (isLoading || !containerRef.current || hasEnteredRef.current) return;
     hasEnteredRef.current = true;
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: { ease: 'power3.out' },
-        onComplete: () => {
-          // Start the gentle float only after the drop-in has fully settled,
-          // so the two tweens never fight over the product transform.
-          if (productRef.current) {
-            gsap.to(productRef.current, {
-              y: '+=16',
-              duration: 3.4,
-              ease: 'sine.inOut',
-              yoyo: true,
-              repeat: -1,
-            });
-          }
-        },
-      });
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.from('[data-hero-bgword]', { opacity: 0, scale: 1.12, duration: 1.2 }, 0)
-        .from(
-          '[data-hero-product]',
-          { yPercent: -140, opacity: 0, rotate: -8, duration: 1.2, ease: 'power4.out' },
-          0.1,
-        )
-        .from('[data-hero-glow]', { opacity: 0, scale: 0.6, duration: 1.2 }, 0.2)
-        .from(
-          '[data-hero-line]',
-          { yPercent: 120, opacity: 0, duration: 0.9, stagger: 0.12 },
-          0.5,
-        )
-        .from('[data-hero-sub]', { y: 30, opacity: 0, duration: 0.8 }, 0.9)
-        .from('[data-hero-cta]', { y: 24, opacity: 0, duration: 0.7, stagger: 0.1 }, 1.05)
-        .from(
-          '[data-hero-callout]',
-          { scale: 0.4, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'back.out(1.7)' },
-          0.9,
-        )
-        .from(
-          '[data-hero-ingredient]',
-          { x: -40, opacity: 0, duration: 0.6, stagger: 0.1 },
-          1.0,
-        )
-        .from('[data-hero-scroll]', { opacity: 0, y: -10, duration: 0.6 }, 1.4);
+      tl.from('[data-hero-bgword]', { opacity: 0, y: 60, duration: 1.1 }, 0)
+        .from('[data-hero-line]', { yPercent: 120, opacity: 0, duration: 1, stagger: 0.12 }, 0.15)
+        .from('[data-hero-sub]', { y: 50, opacity: 0, duration: 0.9, stagger: 0.1 }, 0.5)
+        .from('[data-hero-cta]', { y: 40, opacity: 0, duration: 0.8, stagger: 0.1 }, 0.7)
+        .from('[data-hero-callout]', { y: 60, opacity: 0, duration: 0.8, stagger: 0.12 }, 0.55)
+        .from('[data-hero-ingredient]', { y: 60, opacity: 0, duration: 0.8, stagger: 0.1 }, 0.65)
+        .from('[data-hero-scroll]', { opacity: 0, y: 20, duration: 0.6 }, 1.2);
     }, containerRef);
 
     return () => ctx.revert();
@@ -135,13 +92,14 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
         <div className="absolute bottom-[-12%] left-[30%] w-[48vw] h-[48vw] rounded-full bg-[hsl(var(--c-peach)/0.20)] blur-[140px]" />
       </div>
 
-      {/* Giant background word */}
+      {/* Giant background word — now prominent */}
       <div
         ref={bgWordRef}
         data-hero-bgword
-        className="absolute top-[16%] left-1/2 -translate-x-1/2 text-[24vw] md:text-[20vw] font-display font-semibold leading-none whitespace-nowrap z-0 pointer-events-none select-none text-transparent"
+        className="absolute top-[15%] left-1/2 -translate-x-1/2 text-[26vw] md:text-[21vw] font-display font-bold leading-none whitespace-nowrap z-0 pointer-events-none select-none"
         style={{
-          WebkitTextStroke: '1px hsl(var(--foreground) / 0.08)',
+          color: 'hsl(var(--luxury) / 0.07)',
+          WebkitTextStroke: '2px hsl(var(--luxury) / 0.20)',
         }}
       >
         SERUM
@@ -179,29 +137,17 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
         </div>
       ))}
 
-      {/* Center product */}
+      {/* Center — bottle slot (the traveling bottle rests here) */}
       <div className="relative z-20 flex flex-col items-center justify-center">
         <div className="relative flex items-center justify-center mt-6 md:mt-2">
+          <div className="absolute w-[62vw] max-w-[420px] aspect-square rounded-full bg-[hsl(var(--c-rose)/0.24)] blur-[80px]" />
           <div
-            ref={glowRef}
-            data-hero-glow
-            className="absolute w-[62vw] max-w-[420px] aspect-square rounded-full bg-[hsl(var(--c-rose)/0.28)] blur-[70px]"
+            data-bottle-slot="0"
+            className="relative w-[54vw] max-w-[300px] md:max-w-[340px] aspect-[0.72]"
           />
-          <div ref={productRef} data-hero-product className="relative">
-            <img
-              src={retinolBottle}
-              alt="SWAN Retinol Serum 30ml"
-              className="relative z-10 w-[54vw] max-w-[300px] md:max-w-[340px] h-auto drop-shadow-2xl select-none"
-              draggable={false}
-            />
-            {/* 30ml badge */}
-            <span className="absolute -bottom-2 -right-1 md:right-2 z-20 grid place-items-center w-14 h-14 rounded-full bg-foreground text-background text-[11px] font-semibold tracking-wide rotate-[-8deg]">
-              30 ml
-            </span>
-          </div>
         </div>
 
-        {/* Bold headline (rises from bottom) */}
+        {/* Bold headline (rises from below) */}
         <div className="text-center px-6 mt-8 md:mt-6 max-w-3xl">
           <div className="flex items-center justify-center gap-2 mb-5" data-hero-sub>
             <span className="flex text-[hsl(var(--c-amber))]">
@@ -215,10 +161,10 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
           </div>
 
           <h1 className="font-display font-bold leading-[0.92] text-[13vw] sm:text-6xl md:text-7xl lg:text-8xl">
-            <span data-hero-line className="block">
+            <span data-hero-line className="block text-foreground">
               Skincare,
             </span>
-            <span data-hero-line className="block text-gradient">
+            <span data-hero-line className="block text-luxury">
               perfected.
             </span>
           </h1>
@@ -235,7 +181,7 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
             <button
               data-hero-cta
               onClick={scrollToShop}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-primary text-primary-foreground text-sm font-semibold tracking-wide shadow-lg shadow-primary/30 hover:brightness-105 active:scale-[0.98] transition"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[hsl(var(--luxury))] text-white text-sm font-semibold tracking-wide shadow-lg shadow-primary/30 hover:brightness-110 active:scale-[0.98] transition"
             >
               Shop the collection
             </button>
