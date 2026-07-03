@@ -1,0 +1,755 @@
+Neeche diya gaya prompt seedha **Replit AI / Claude Code** ko de sakte hain. Isay maine PRD style mein likha hai taake AI sirf basic website na banaye, balki premium Awwwards-level frontend develop kare.
+
+---
+
+# PRD – BranX Premium Skincare Website (Awwwards Level)
+
+## Project Goal
+
+Build an ultra-premium, luxury skincare website for **BranX** using **Next.js**. The final result must look like it was designed by an award-winning UI/UX agency. Every section should feel cinematic with smooth animations, premium interactions, and a luxury skincare aesthetic.
+
+This is **NOT** a normal ecommerce website.
+
+It must feel like an **Apple × Aesop × Dior Beauty × Awwwards** experience.
+
+---
+
+# Tech Stack (Strict)
+
+Use only production-ready technologies.
+
+* Next.js (Latest App Router)
+* TypeScript
+* Tailwind CSS
+* GSAP
+* Framer Motion
+* Lenis Smooth Scroll
+* SplitType
+* React Icons
+* Lucide Icons
+* shadcn/ui
+* Aceternity UI
+* Magic UI
+* Motion Primitives
+* React Intersection Observer
+* next/image
+* next/font
+* ESLint
+* Prettier
+
+Initialize premium UI components.
+
+```bash
+npm install gsap
+npm install framer-motion
+npm install @studio-freight/lenis
+npm install split-type
+npm install lucide-react
+npm install react-icons
+
+npx shadcn@latest init
+
+uipro init --ai claude
+```
+
+Everything must be production-ready.
+
+No warnings.
+
+No hydration issues.
+
+No console errors.
+
+No layout shifts.
+
+Deploy directly on Vercel without changing any code.
+
+---
+
+# Website Theme
+
+Luxury Premium Skincare
+
+Elegant
+
+Minimal
+
+Modern
+
+Cinematic
+
+Soft
+
+Premium
+
+Expensive Looking
+
+---
+
+# Color Palette
+
+Main Background
+
+Soft Blush Pink
+
+Very Light Nude
+
+Cream White
+
+Warm Ivory
+
+Light Rose
+
+Gradient Backgrounds
+
+Pink → White
+
+Rose → Cream
+
+Soft Beige
+
+Buttons
+
+Glossy Glass Pink
+
+Glass White
+
+Hover Glow
+
+Accent Color
+
+Rose Gold
+
+Soft Purple
+
+Luxury White
+
+Everything should feel premium.
+
+No dark colors.
+
+No harsh gradients.
+
+---
+
+# Fonts
+
+Headings
+
+DM Sans
+
+or
+
+Satoshi
+
+Body
+
+Inter
+
+Large typography
+
+Luxury spacing
+
+Premium hierarchy
+
+---
+
+# Loader
+
+When website opens
+
+Show a cinematic preloader.
+
+Loader duration
+
+2–3 seconds.
+
+Animation sequence
+
+Luxury logo reveal
+
+Soft blur
+
+Glass morphism
+
+Loading percentage
+
+Luxury particles
+
+Background glow
+
+After loader finishes
+
+Entire website should animate in.
+
+---
+
+# Hero Section
+
+Hero should be full viewport.
+
+Reference inspiration:
+
+Image 1 provided.
+
+But adapted for skincare.
+
+Instead of green background use luxury skincare environment.
+
+Example background
+
+Soft pink clouds
+
+Cream gradients
+
+Luxury skincare studio
+
+Floating bubbles
+
+Soft glow
+
+Glass reflections
+
+Natural light
+
+Luxury particles
+
+Animated mist
+
+---
+
+# Hero Animation Sequence
+
+After loader
+
+First
+
+Background fades in
+
+Then
+
+Huge typography slides upward
+
+Example
+
+Healthy Skin
+
+Radiant Beauty
+
+Pure Glow
+
+Everyday Luxury
+
+Clinical Skincare
+
+Use premium words.
+
+Do NOT use placeholder text.
+
+---
+
+Text animation
+
+Split letters
+
+GSAP stagger
+
+Blur reveal
+
+Opacity animation
+
+Mask animation
+
+---
+
+Then
+
+Main skincare product drops from top.
+
+Very smooth.
+
+Luxury easing.
+
+No bounce.
+
+Looks premium.
+
+---
+
+Floating elements
+
+Cream jar
+
+Serum bottle
+
+Capsules
+
+Glass bubbles
+
+Leaves
+
+Glow particles
+
+All slowly floating.
+
+---
+
+# Scroll Animation
+
+As user scrolls
+
+Main hero product slowly moves downward.
+
+Exactly like premium Apple storytelling websites.
+
+Very smooth.
+
+GSAP ScrollTrigger.
+
+No lag.
+
+---
+
+# Product Story Section
+
+While scrolling
+
+Main hero product should travel into next section.
+
+The product should smoothly transform into the middle product card.
+
+Do NOT replace instantly.
+
+Morph movement feeling.
+
+Premium transition.
+
+---
+
+Below it
+
+Show three luxury product cards.
+
+Inspired by second reference image.
+
+Middle card contains the product coming from Hero.
+
+Left
+
+Product
+
+Right
+
+Product
+
+Middle
+
+Main highlighted product
+
+Glassmorphism cards
+
+Rounded corners
+
+Luxury shadows
+
+Soft reflections
+
+Hover animations
+
+Glow
+
+Floating
+
+Tilt
+
+Scale
+
+---
+
+# Product Cards
+
+Each card contains
+
+Product image
+
+Rating
+
+Product name
+
+Luxury description
+
+Price
+
+Button
+
+Glass button
+
+Hover
+
+Glow
+
+Magnetic effect
+
+Micro interactions
+
+---
+
+# GSAP Storytelling
+
+After cards
+
+Create premium storytelling.
+
+Examples
+
+Rolling Text
+
+Horizontal scrolling text
+
+Huge typography
+
+Parallax images
+
+Image reveal
+
+Text masking
+
+Blur transitions
+
+Pinned sections
+
+Fade effects
+
+Scale effects
+
+Luxury transitions
+
+Apple style.
+
+---
+
+# Products Section
+
+All products supplied later by me.
+
+Do NOT use placeholders.
+
+Create reusable Product component.
+
+Each product animation
+
+Fade
+
+Slide
+
+Scale
+
+Glow
+
+Hover
+
+Luxury micro interactions
+
+---
+
+# Buttons
+
+All buttons
+
+Glassmorphism
+
+Rounded
+
+Glow
+
+Reflection
+
+Hover lift
+
+Magnetic
+
+Animated border
+
+Ripple
+
+Soft shadow
+
+Luxury feeling.
+
+---
+
+# Header
+
+Floating
+
+Transparent
+
+Glass
+
+Blur
+
+Sticky
+
+Shrink on scroll
+
+Smooth transition
+
+Logo left
+
+Navigation center
+
+CTA button right
+
+Hover underline animations
+
+---
+
+# Footer
+
+Luxury footer
+
+Glass background
+
+Soft gradient
+
+Animated divider
+
+Newsletter
+
+Social icons
+
+Quick links
+
+Contact
+
+Bottom text
+
+Developed by BranX
+
+Luxury fade animation.
+
+---
+
+# Product Page
+
+Each product page must be premium.
+
+Hero animation
+
+Sticky gallery
+
+Zoom
+
+Hover image
+
+Floating CTA
+
+Animated Add to Cart
+
+Premium reviews
+
+Benefits
+
+Ingredients
+
+Timeline
+
+FAQs
+
+Comparison table
+
+Before After section
+
+Trust badges
+
+Shipping
+
+Guarantee
+
+Luxury transitions
+
+Sticky buy section
+
+Conversion optimized.
+
+---
+
+# Cart Drawer
+
+Glass effect
+
+Smooth slide
+
+Luxury animations
+
+Quantity controls
+
+Animated totals
+
+Checkout button
+
+Glow
+
+No lag.
+
+---
+
+# Animations
+
+Use GSAP everywhere.
+
+Use Framer Motion where appropriate.
+
+Examples
+
+ScrollTrigger
+
+Split text
+
+Parallax
+
+Pin sections
+
+Opacity
+
+Blur
+
+Scale
+
+Rotation
+
+Horizontal scroll
+
+Image masking
+
+Card stacking
+
+Reveal animations
+
+Hover interactions
+
+Cursor interactions
+
+Magnetic buttons
+
+Floating elements
+
+Mouse parallax
+
+Glass reflections
+
+Everything should feel alive.
+
+---
+
+# Performance
+
+Lighthouse
+
+90+
+
+SEO
+
+95+
+
+Accessibility
+
+90+
+
+Best Practices
+
+95+
+
+CLS
+
+Almost zero
+
+Use
+
+next/image
+
+Dynamic imports
+
+Optimized animations
+
+No blocking scripts
+
+---
+
+# Responsive
+
+Desktop
+
+Tablet
+
+Mobile
+
+Everything should be custom designed.
+
+No broken layout.
+
+No overflow.
+
+No horizontal scrollbar.
+
+No animation glitches.
+
+---
+
+# Coding Standards
+
+Component based architecture.
+
+Reusable.
+
+Clean folder structure.
+
+No duplicated code.
+
+TypeScript everywhere.
+
+No inline styles.
+
+Tailwind only.
+
+No unused imports.
+
+No console logs.
+
+No warnings.
+
+No deprecated packages.
+
+---
+
+# Images
+
+I will provide all product images.
+
+Use only those images.
+
+Optimize automatically.
+
+Keep transparent PNGs clean.
+
+Do not stretch images.
+
+Maintain aspect ratio.
+
+---
+
+# Final Result
+
+The final website should feel like it belongs on **Awwwards**.
+
+Visitors should immediately think:
+
+"This is a luxury skincare brand."
+
+Every animation should feel intentional.
+
+Every interaction should feel expensive.
+
+The UI should look handcrafted by a senior product designer.
+
+The frontend must be production-ready, fully responsive, error-free, optimized for Vercel deployment, and require no additional fixes after generation.

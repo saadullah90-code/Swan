@@ -1,6 +1,6 @@
-# [Project name]
+# SWAN Skincare
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An ultra-premium, cinematic single-page marketing website for the SWAN Skincare luxury serum line, built to an Awwwards-level standard with GSAP + Framer Motion animations.
 
 ## Run & Operate
 
@@ -30,7 +30,7 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Single-page, frontend-only luxury marketing site (artifact `swan-skincare`, previewPath `/`). Sections: cinematic preloader, hero, story/philosophy, horizontal-scroll headline, product shop, ingredients, ritual, press/journal, footer. Client-side cart (zustand) with a slide-out drawer — no real checkout or persistence. Three real products, all 30ml: Hyaluronic Acid Serum ($68, blue), Vitamin C Serum ($72, pink), Retinol Serum ($76, rose). Palette is soft blush pink / cream / rose gold; footer reads "Developed by BranX". Fonts: Playfair Display (serif) + Outfit (sans).
 
 ## User preferences
 
@@ -38,7 +38,8 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The hero's Framer Motion entrance delays (~2.2–3.5s) are synced to the 2.5s cinematic preloader. A fresh-load screenshot always captures the preloader/blank hero because content is still `opacity: 0` at capture time. To visually verify the hero, temporarily shorten the preloader timer in `Home.tsx` AND the hero delays in `Hero.tsx`, then restore both.
+- The Google Fonts `@import` must be the very first line of `src/index.css` (before the tailwindcss/plugin imports) or the build fails.
 
 ## Pointers
 

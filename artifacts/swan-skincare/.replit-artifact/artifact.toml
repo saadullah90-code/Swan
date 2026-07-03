@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "SWAN Skincare"
+version = "1.0.0"
+id = "artifacts/swan-skincare"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22849
+
+[services.development]
+run = "pnpm --filter @workspace/swan-skincare run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/swan-skincare", "run", "build" ]
+publicDir = "artifacts/swan-skincare/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22849"
+BASE_PATH = "/"
