@@ -5,27 +5,14 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { mockupPreviewPlugin } from "./mockupPreviewPlugin";
 
+// On Replit the workflow injects PORT/BASE_PATH. On external CI/hosts (e.g. Vercel)
+// they are absent during `vite build`, so fall back to sensible defaults instead of
+// throwing so a full monorepo build never crashes on a missing env var.
 const rawPort = process.env.PORT;
+const parsedPort = rawPort ? Number(rawPort) : NaN;
+const port = Number.isNaN(parsedPort) || parsedPort <= 0 ? 5174 : parsedPort;
 
-if (!rawPort) {
-  throw new Error(
-    "PORT environment variable is required but was not provided.",
-  );
-}
-
-const port = Number(rawPort);
-
-if (Number.isNaN(port) || port <= 0) {
-  throw new Error(`Invalid PORT value: "${rawPort}"`);
-}
-
-const basePath = process.env.BASE_PATH;
-
-if (!basePath) {
-  throw new Error(
-    "BASE_PATH environment variable is required but was not provided.",
-  );
-}
+const basePath = process.env.BASE_PATH || "/";
 
 export default defineConfig({
   base: basePath,
