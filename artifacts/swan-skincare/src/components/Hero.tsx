@@ -144,7 +144,7 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
           <div className="absolute w-[62vw] max-w-[420px] aspect-square rounded-full bg-[hsl(var(--c-rose)/0.24)] blur-[80px]" />
           <div
             data-bottle-slot="0"
-            className="relative w-[52vw] max-w-[240px] md:max-w-[340px] aspect-[0.72]"
+            className="relative w-[66vw] max-w-[300px] md:max-w-[340px] aspect-[0.72]"
           >
             {/* Static "30 ml" badge — stays in the hero, does not travel with the bottle */}
             <span
