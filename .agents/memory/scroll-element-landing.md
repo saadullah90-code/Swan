@@ -20,3 +20,6 @@ description: How to make a persistent fixed element travel on scroll and land pr
 - Keep competing transforms on SEPARATE nested wrappers: outer(translate+scale, ticker) > entrance(one-time) > rotator(rotate, ticker) > float(infinite y). Two animators writing one element's transform fight each other.
 - Any companion visuals (glow/shadow) must be written by the **same** place() call (or nested inside the driven element) so they can't detach.
 - Cleanup: `gsap.ticker.remove(tick)`, revert the `gsap.context()`, drop listeners/timeouts on unmount, or a per-frame callback leaks across route changes.
+
+**Add a "dwell" window per slot to kill the "stuck at viewport centre" feel.** Pure linear lerp between two live rects keeps the element pinned near viewport centre for the whole (often long) segment, which reads as frozen. Fix: around each anchor reserve a small rest window (`dwell = min(vh*0.16, 150)` px, capped at ~35% of the segment each side). Inside the rest window snap the element to that slot's live rect (so it scrolls WITH the page = a natural brief pause), and only lerp (with smootherstep) in the shorter middle band. Boundaries stay continuous because rest-end == transition-start == slot centre, so no jump.
+**Why:** users perceive "moving with scroll then a short rest at each card" as intentional; a constant-centre float reads as a bug/stutter.

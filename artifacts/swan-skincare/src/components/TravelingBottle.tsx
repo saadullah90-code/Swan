@@ -56,6 +56,8 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
     const clamp = (v: number, min: number, max: number) =>
       Math.min(Math.max(v, min), max);
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+    // Smootherstep — eases the glide out of one card and into the next.
+    const smoother = (t: number) => t * t * t * (t * (t * 6 - 15) + 10);
     const spinEase = gsap.parseEase('power2.in');
 
     const place = () => {
@@ -69,35 +71,57 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
         (r) => r.top + scrollY + r.height / 2 - vh / 2,
       );
       const last = slots.length - 1;
+      // How long (in scroll px) the bottle rests glued to a slot before it
+      // glides on. This gives an intentional "theher" at each slot/card and
+      // removes the old long "stuck at viewport centre" feeling.
+      const dwell = Math.min(vh * 0.16, 150);
 
-      let cx: number;
-      let cy: number;
-      let w: number;
+      let cx = 0;
+      let cy = 0;
+      let w = 0;
       let rot = 0;
 
-      if (scrollY <= anchors[0]) {
-        const r = rects[0];
+      const restOn = (r: DOMRect) => {
         cx = r.left + r.width / 2;
         cy = r.top + r.height / 2;
         w = r.width;
+      };
+
+      if (scrollY <= anchors[0]) {
+        restOn(rects[0]);
       } else if (scrollY >= anchors[last]) {
         // Docked on the final slot — follows its live rect and scrolls away.
-        const r = rects[last];
-        cx = r.left + r.width / 2;
-        cy = r.top + r.height / 2;
-        w = r.width;
+        restOn(rects[last]);
       } else {
         let i = 0;
         while (i < last && scrollY >= anchors[i + 1]) i++;
-        const denom = anchors[i + 1] - anchors[i] || 1;
-        const local = clamp((scrollY - anchors[i]) / denom, 0, 1);
-        const a = rects[i];
-        const b = rects[i + 1];
-        cx = lerp(a.left + a.width / 2, b.left + b.width / 2, local);
-        cy = lerp(a.top + a.height / 2, b.top + b.height / 2, local);
-        w = lerp(a.width, b.width, local);
-        // Full clockwise spin as it drops from the hero into the collection.
-        if (i === 0) rot = spinEase(local) * 360;
+        const segStart = anchors[i];
+        const segEnd = anchors[i + 1];
+        // Cap the rest so a short segment still leaves room to travel.
+        const rest = Math.min(dwell, (segEnd - segStart) * 0.35);
+        const startRest = segStart + rest;
+        const endRest = segEnd - rest;
+
+        if (scrollY <= startRest) {
+          // Resting on slot i — glued to its live rect, so it scrolls with the page.
+          restOn(rects[i]);
+          if (i === 0) rot = 0;
+        } else if (scrollY >= endRest) {
+          // Resting on slot i+1.
+          restOn(rects[i + 1]);
+          if (i === 0) rot = 360;
+        } else {
+          const denom = endRest - startRest || 1;
+          const local = clamp((scrollY - startRest) / denom, 0, 1);
+          const eased = smoother(local);
+          const a = rects[i];
+          const b = rects[i + 1];
+          cx = lerp(a.left + a.width / 2, b.left + b.width / 2, eased);
+          cy = lerp(a.top + a.height / 2, b.top + b.height / 2, eased);
+          w = lerp(a.width, b.width, eased);
+          // Full clockwise spin as it drops from the hero into the collection.
+          if (i === 0) rot = spinEase(local) * 360;
+        }
       }
 
       const s = w / (outerW || BASE_W);
