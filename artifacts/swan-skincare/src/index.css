@@ -261,3 +261,35 @@ html.lenis, html.lenis body {
     cursor: auto !important;
   }
 }
+
+/* Touch devices: backdrop-filter blur repaints every scroll frame and chokes
+   mobile GPUs, which shows up as animation stutter/glitching. Cap it hard. */
+@media (pointer: coarse) {
+  .glass,
+  .glass-heavy,
+  .glossy,
+  .header-pill,
+  .header-pill.is-scrolled {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* Per-slot static bottles vs. the single travelling bottle. The travelling
+   bottle only runs on desktop (wide viewport + fine pointer, see DESKTOP_MQ);
+   everywhere else each slot shows a static bottle and its empty marker collapses.
+   Keeping this media query identical to DESKTOP_MQ keeps CSS and JS in lockstep. */
+.slot-static {
+  display: block;
+}
+.slot-marker {
+  display: none;
+}
+@media (min-width: 768px) and (pointer: fine) {
+  .slot-static {
+    display: none;
+  }
+  .slot-marker {
+    display: block;
+  }
+}

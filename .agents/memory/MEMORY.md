@@ -1,3 +1,4 @@
 - [Scroll-linked element travel/landing (GSAP)](scroll-element-landing.md) — to make a fixed element "land" into a normal-flow slot, measure the slot's live rect each frame; never animate to fixed viewport percentages.
 - [SWAN header/logo contrast](swan-header-logo.md) — the rose-gold swan logo is low-contrast on the light theme; keep it on a dark surface (wine-tinted pill) so it reads.
 - [Vercel/external builds](vercel-external-build.md) — swan-skincare: vite.config falls back on missing PORT/BASE_PATH; root vercel.json + SPA rewrites; import WebP not multi-MB PNGs.
+- [SWAN mobile strategy](swan-mobile-strategy.md) — Lenis + travelling bottle are desktop-only via DESKTOP_MQ (width + pointer:fine); static per-slot bottles shown via CSS classes kept in lockstep with the JS gate.

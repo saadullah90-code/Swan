@@ -146,6 +146,13 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
             data-bottle-slot="0"
             className="relative w-[66vw] max-w-[300px] md:max-w-[340px] aspect-[0.72]"
           >
+            {/* Mobile-only static bottle (desktop uses the travelling bottle) */}
+            <img
+              src={retinolProduct.image}
+              alt="SWAN Retinol Serum"
+              className="slot-static absolute inset-0 w-full h-full object-contain drop-shadow-2xl select-none"
+              draggable={false}
+            />
             {/* Static "30 ml" badge — stays in the hero, does not travel with the bottle */}
             <span
               data-hero-badge

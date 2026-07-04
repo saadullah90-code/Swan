@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { getProduct } from '@/data/products';
+import { useIsDesktop } from '@/lib/useIsDesktop';
 
 const bottle = getProduct('retinol-serum')!;
 const BASE_W = 320; // base render width in px; scaled per slot
@@ -27,9 +28,14 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
   const floatRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const enteredRef = useRef(false);
+  // The travelling bottle is a desktop-only flourish. On touch devices it is
+  // replaced by static bottles rendered inside each slot (see the section
+  // components), because a per-frame fixed element jumps around when the mobile
+  // browser's address bar resizes the viewport.
+  const isDesktop = useIsDesktop();
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading || !isDesktop) return;
     const outer = outerRef.current;
     const rotator = rotatorRef.current;
     const img = imgRef.current;
@@ -184,7 +190,9 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
       window.clearTimeout(t2);
       ctx.revert();
     };
-  }, [isLoading]);
+  }, [isLoading, isDesktop]);
+
+  if (!isDesktop) return null;
 
   return (
     <div

@@ -101,9 +101,15 @@ export default function FeaturedProducts() {
                 `} />
 
                 {i === 1 ? (
-                  // The traveling bottle lands here.
+                  // The traveling bottle lands here (desktop). On mobile there is
+                  // no travelling bottle, so show this card's own product image.
                   <div className="relative z-10 h-full w-full flex items-center justify-center">
-                    <div data-bottle-slot="1" className="w-[64%] aspect-[0.72]" />
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="slot-static h-full object-contain drop-shadow-2xl"
+                    />
+                    <div data-bottle-slot="1" className="slot-marker w-[64%] aspect-[0.72]" />
                   </div>
                 ) : (
                   <img

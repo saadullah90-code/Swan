@@ -3,8 +3,11 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Check } from 'lucide-react';
 import lady from '@assets/optimized/lady_serum_ritual.webp';
+import { getProduct } from '@/data/products';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const retinol = getProduct('retinol-serum')!;
 
 const points = [
   'Clinically-loved active ingredients',
@@ -102,8 +105,15 @@ export default function RitualFace() {
           <div className="absolute -left-4 md:-left-8 bottom-10 glass rounded-3xl p-4 luxury-shadow flex flex-col items-center gap-2">
             <div
               data-bottle-slot="3"
-              className="w-24 sm:w-28 aspect-[0.72]"
-            />
+              className="relative w-24 sm:w-28 aspect-[0.72]"
+            >
+              <img
+                src={retinol.image}
+                alt=""
+                className="slot-static absolute inset-0 w-full h-full object-contain drop-shadow-xl"
+                draggable={false}
+              />
+            </div>
             <span className="text-[10px] uppercase tracking-widest font-semibold text-foreground/70">
               Retinol Serum
             </span>
