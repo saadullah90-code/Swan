@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import swan from '@assets/generated_images/swan_line_art.png';
+import swan from '@assets/optimized/swan_line_art.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

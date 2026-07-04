@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Check } from 'lucide-react';
-import lady from '@assets/generated_images/lady_serum_ritual.png';
+import lady from '@assets/optimized/lady_serum_ritual.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 

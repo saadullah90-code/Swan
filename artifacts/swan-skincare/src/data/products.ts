@@ -1,8 +1,8 @@
 import { Product } from '@/store/useCartStore';
 
-import haBottle from '@assets/ChatGPT_Image_Jul_3,_2026,_03_41_49_PM-Photoroom_1783077232627.png';
-import vcBottle from '@assets/ChatGPT_Image_Jul_3,_2026,_03_37_36_PM-Photoroom_1783077232628.png';
-import retinolBottle from '@assets/ChatGPT_Image_Jul_3,_2026,_03_41_09_PM-Photoroom_1783077232628.png';
+import haBottle from '@assets/optimized/ChatGPT_Image_Jul_3,_2026,_03_41_49_PM-Photoroom_1783077232627.webp';
+import vcBottle from '@assets/optimized/ChatGPT_Image_Jul_3,_2026,_03_37_36_PM-Photoroom_1783077232628.webp';
+import retinolBottle from '@assets/optimized/ChatGPT_Image_Jul_3,_2026,_03_41_09_PM-Photoroom_1783077232628.webp';
 
 export const products: Product[] = [
   {

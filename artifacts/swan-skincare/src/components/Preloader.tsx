@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SplitType from 'split-type';
-import logo from '@assets/ChatGPT_Image_Jul_3,_2026,_04_16_42_PM_1783077418756.png';
+import logo from '@assets/optimized/ChatGPT_Image_Jul_3,_2026,_04_16_42_PM_1783077418756.webp';
 
 gsap.registerPlugin(ScrollTrigger);
 
