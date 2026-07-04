@@ -111,9 +111,11 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
       if (!enteredRef.current) {
         enteredRef.current = true;
         gsap.from(entranceRef.current, {
-          y: -220,
+          y: -280,
           opacity: 0,
-          duration: 1.3,
+          scale: 0.82,
+          filter: 'blur(10px)',
+          duration: 1.5,
           ease: 'power4.out',
         });
         gsap.to(floatRef.current, {
@@ -187,9 +189,6 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
               className="relative w-full h-auto drop-shadow-2xl select-none"
               draggable={false}
             />
-            <span className="absolute -bottom-1 right-3 z-20 grid place-items-center w-14 h-14 rounded-full bg-foreground text-background text-[11px] font-semibold tracking-wide rotate-[-8deg]">
-              30 ml
-            </span>
           </div>
         </div>
       </div>

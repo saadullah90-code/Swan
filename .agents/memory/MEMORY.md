@@ -1,1 +1,2 @@
 - [Scroll-linked element travel/landing (GSAP)](scroll-element-landing.md) — to make a fixed element "land" into a normal-flow slot, measure the slot's live rect each frame; never animate to fixed viewport percentages.
+- [SWAN header/logo contrast](swan-header-logo.md) — the rose-gold swan logo is low-contrast on the light theme; keep it on a dark surface (wine-tinted pill) so it reads.

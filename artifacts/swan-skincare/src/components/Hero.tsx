@@ -68,8 +68,9 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.from('[data-hero-bgword]', { opacity: 0, y: 150, duration: 1.3, ease: 'power4.out' }, 0)
+      tl.from('[data-hero-bgword]', { opacity: 0, y: 190, filter: 'blur(6px)', duration: 1.4, ease: 'power4.out' }, 0)
         .from('[data-hero-line]', { yPercent: 120, opacity: 0, duration: 1, stagger: 0.12 }, 0.15)
+        .from('[data-hero-badge]', { opacity: 0, scale: 0.6, duration: 0.7, ease: 'back.out(2)' }, 0.9)
         .from('[data-hero-sub]', { y: 50, opacity: 0, duration: 0.9, stagger: 0.1 }, 0.5)
         .from('[data-hero-cta]', { y: 40, opacity: 0, duration: 0.8, stagger: 0.1 }, 0.7)
         .from('[data-hero-callout]', { y: 60, opacity: 0, duration: 0.8, stagger: 0.12 }, 0.55)
@@ -83,7 +84,7 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-[100svh] overflow-hidden bg-background bg-aurora pt-28 pb-16"
+      className="relative w-full min-h-[100svh] overflow-hidden bg-background bg-aurora pt-36 md:pt-32 pb-16"
     >
       {/* Colorful ambient orbs */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -143,12 +144,20 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
           <div className="absolute w-[62vw] max-w-[420px] aspect-square rounded-full bg-[hsl(var(--c-rose)/0.24)] blur-[80px]" />
           <div
             data-bottle-slot="0"
-            className="relative w-[54vw] max-w-[300px] md:max-w-[340px] aspect-[0.72]"
-          />
+            className="relative w-[52vw] max-w-[240px] md:max-w-[340px] aspect-[0.72]"
+          >
+            {/* Static "30 ml" badge — stays in the hero, does not travel with the bottle */}
+            <span
+              data-hero-badge
+              className="absolute bottom-1 right-0 sm:right-2 z-20 grid place-items-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-[hsl(var(--luxury))] text-white text-[10px] md:text-[11px] font-semibold tracking-wide rotate-[-8deg] shadow-lg shadow-primary/30"
+            >
+              30 ml
+            </span>
+          </div>
         </div>
 
         {/* Bold headline (rises from below) */}
-        <div className="text-center px-6 mt-8 md:mt-6 max-w-3xl">
+        <div className="text-center px-6 mt-12 md:mt-6 max-w-3xl">
           <div className="flex items-center justify-center gap-2 mb-5" data-hero-sub>
             <span className="flex text-[hsl(var(--c-amber))]">
               {[...Array(5)].map((_, i) => (
