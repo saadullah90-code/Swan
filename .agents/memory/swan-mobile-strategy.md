@@ -1,31 +1,32 @@
 ---
-name: SWAN mobile responsiveness strategy
-description: How the signature scroll choreography behaves on touch/mobile — the travelling bottle runs everywhere, Lenis smooth-scroll is desktop-only.
+name: SWAN mobile smooth-scroll strategy
+description: Why Lenis runs on all devices and how the per-frame travelling bottle is kept smooth on mobile.
 ---
 
 # SWAN mobile strategy
 
-The signature travelling serum bottle (single fixed element that glides between
-`[data-bottle-slot]` markers as you scroll) runs on **ALL devices**, desktop and
-mobile. **Why:** the user explicitly wanted the desktop bottle animation to work
-"same to same" on mobile.
+The signature travelling serum bottle is a single fixed element positioned per-frame
+from the scroll position + live slot rects. It runs on all devices and must feel as
+smooth on mobile as on desktop.
 
-**How it works cross-device:** the bottle recomputes its position every frame from
-`window.scrollY` + the live `getBoundingClientRect` of each slot, driven by
-`gsap.ticker` (which runs its own RAF loop independent of Lenis). So it tracks native
-mobile scroll exactly as it tracks Lenis smooth-scroll on desktop — no gating needed.
+## Lenis runs on ALL devices — do not re-gate it to desktop
+**Why:** a JS-positioned per-frame element lags native mobile momentum scroll (which
+runs on the compositor thread) → jitter/"swim". Driving touch through Lenis's sync-touch
+mode puts scroll on the same gsap.ticker as the bottle, so they stay in phase — same as
+desktop. An earlier note claimed "Lenis fights native touch"; that was *without*
+sync-touch. Touch options don't affect desktop wheel scrolling, so desktop is unchanged.
+**How to apply:** keep Lenis a single instance on one RAF loop; never add a second raf.
 
-**Lenis smooth-scroll is still desktop-only** (`SmoothScroll` gates on
-`useIsDesktop()` / `DESKTOP_MQ = '(min-width:768px) and (pointer:fine)'`). On touch it
-fought native scrolling and felt janky. The bottle does NOT depend on Lenis, so this
-split is fine.
+## Viewport-height jumps on mobile
+**Why:** the mobile address bar hiding/showing changes innerHeight mid-scroll, which
+shifted the bottle's anchor math and made it jump.
+**How to apply:** cache vh; on touch (pointer:coarse) only adopt large changes
+(orientation), ignore small address-bar deltas; on desktop always track innerHeight so
+desktop stays untouched.
 
-**Static per-slot fallback bottles are OFF everywhere.** The CSS helpers
-`.slot-static { display:none }` / `.slot-marker { display:block }` (in `index.css`) are
-now unconditional — there was a period when static bottles replaced the travelling one
-on mobile; that was reverted. Do NOT re-introduce static-vs-travelling gating unless the
-requirement changes again. Every `[data-bottle-slot]` marker must stay laid out and
-non-zero-size on every breakpoint (a collapsed slot rect shrinks the bottle toward 0).
-
-**Also:** `backdrop-filter` capped to `blur(8px)` under `@media (pointer: coarse)` to
-relieve mobile GPUs — keep this.
+## Invariants
+- Every `[data-bottle-slot]` marker must stay laid out & non-zero on every breakpoint —
+  a collapsed rect shrinks the bottle toward zero.
+- Static per-slot fallback bottles are off everywhere.
+- Mobile-only perf: heavy filters (the bottle glow/shadow, backdrop blur) are reduced
+  under pointer:coarse; desktop keeps full strength.

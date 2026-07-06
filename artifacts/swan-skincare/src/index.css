@@ -284,3 +284,23 @@ html.lenis, html.lenis body {
 .slot-marker {
   display: block;
 }
+
+/* The travelling bottle's glow + drop-shadow are filters that recomposite every
+   frame while the bottle moves. Desktop keeps the full-strength look; touch
+   devices get lighter filters so the per-frame animation stays smooth. The
+   desktop values below are byte-identical to the old Tailwind blur-[70px] /
+   drop-shadow-2xl, so desktop is unchanged. */
+.bottle-glow {
+  filter: blur(70px);
+}
+.bottle-img {
+  filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+}
+@media (pointer: coarse) {
+  .bottle-glow {
+    filter: blur(30px);
+  }
+  .bottle-img {
+    filter: drop-shadow(0 12px 14px rgb(0 0 0 / 0.16));
+  }
+}

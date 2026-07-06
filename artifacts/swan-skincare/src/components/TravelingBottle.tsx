@@ -55,6 +55,16 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
     };
     measureOuter();
 
+    // Cached viewport height. On touch devices the address bar hiding/showing
+    // nudges window.innerHeight by ~60-100px mid-scroll, which would shift the
+    // anchors and make the bottle jump — so on touch we only adopt large changes
+    // (orientation). On desktop (fine pointer) we always track innerHeight, so
+    // desktop behaviour is completely unchanged.
+    const coarse =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(pointer: coarse)').matches;
+    let vh = window.innerHeight;
+
     const clamp = (v: number, min: number, max: number) =>
       Math.min(Math.max(v, min), max);
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -64,7 +74,6 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
 
     const place = () => {
       if (slots.length === 0) return;
-      const vh = window.innerHeight;
       const scrollY = window.scrollY || window.pageYOffset;
 
       const rects = slots.map((s) => s.getBoundingClientRect());
@@ -159,11 +168,16 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
     gsap.ticker.add(tick);
 
     const onResize = () => {
+      const nextVh = window.innerHeight;
+      // Desktop: always track. Touch: ignore small address-bar deltas, adopt
+      // only large changes (orientation) to avoid mid-scroll jumps.
+      if (!coarse || Math.abs(nextVh - vh) > 120) vh = nextVh;
       collect();
       measureOuter();
       place();
     };
     window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onResize);
 
     const onImgLoad = () => {
       measureOuter();
@@ -181,6 +195,7 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
     return () => {
       gsap.ticker.remove(tick);
       window.removeEventListener('resize', onResize);
+      window.removeEventListener('orientationchange', onResize);
       img.removeEventListener('load', onImgLoad);
       window.clearTimeout(t1);
       window.clearTimeout(t2);
@@ -207,12 +222,12 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
       <div ref={entranceRef}>
         <div ref={rotatorRef} style={{ transformOrigin: 'center' }}>
           <div ref={floatRef} className="relative">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] aspect-square rounded-full bg-[hsl(var(--c-rose)/0.28)] blur-[70px]" />
+            <div className="bottle-glow absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] aspect-square rounded-full bg-[hsl(var(--c-rose)/0.28)]" />
             <img
               ref={imgRef}
               src={bottle.image}
               alt=""
-              className="relative w-full h-auto drop-shadow-2xl select-none"
+              className="bottle-img relative w-full h-auto select-none"
               draggable={false}
             />
           </div>
