@@ -275,21 +275,12 @@ html.lenis, html.lenis body {
   }
 }
 
-/* Per-slot static bottles vs. the single travelling bottle. The travelling
-   bottle only runs on desktop (wide viewport + fine pointer, see DESKTOP_MQ);
-   everywhere else each slot shows a static bottle and its empty marker collapses.
-   Keeping this media query identical to DESKTOP_MQ keeps CSS and JS in lockstep. */
+/* The single travelling bottle now runs on ALL devices, so the per-slot static
+   fallback bottles are never shown and every slot marker stays laid out (the
+   bottle lands in its live rect). */
 .slot-static {
-  display: block;
-}
-.slot-marker {
   display: none;
 }
-@media (min-width: 768px) and (pointer: fine) {
-  .slot-static {
-    display: none;
-  }
-  .slot-marker {
-    display: block;
-  }
+.slot-marker {
+  display: block;
 }

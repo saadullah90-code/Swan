@@ -146,7 +146,7 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
             data-bottle-slot="0"
             className="relative w-[66vw] max-w-[300px] md:max-w-[340px] aspect-[0.72]"
           >
-            {/* Mobile-only static bottle (desktop uses the travelling bottle) */}
+            {/* Static fallback bottle (hidden — the travelling bottle covers this slot on all devices) */}
             <img
               src={retinolProduct.image}
               alt="SWAN Retinol Serum"

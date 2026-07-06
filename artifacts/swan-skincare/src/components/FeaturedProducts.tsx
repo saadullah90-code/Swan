@@ -101,8 +101,8 @@ export default function FeaturedProducts() {
                 `} />
 
                 {i === 1 ? (
-                  // The traveling bottle lands here (desktop). On mobile there is
-                  // no travelling bottle, so show this card's own product image.
+                  // The travelling bottle lands here on all devices; the static
+                  // image below is a hidden fallback (see .slot-static in index.css).
                   <div className="relative z-10 h-full w-full flex items-center justify-center">
                     <img
                       src={product.image}

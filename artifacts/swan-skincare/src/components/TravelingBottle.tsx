@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { getProduct } from '@/data/products';
-import { useIsDesktop } from '@/lib/useIsDesktop';
 
 const bottle = getProduct('retinol-serum')!;
 const BASE_W = 320; // base render width in px; scaled per slot
@@ -28,14 +27,11 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
   const floatRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const enteredRef = useRef(false);
-  // The travelling bottle is a desktop-only flourish. On touch devices it is
-  // replaced by static bottles rendered inside each slot (see the section
-  // components), because a per-frame fixed element jumps around when the mobile
-  // browser's address bar resizes the viewport.
-  const isDesktop = useIsDesktop();
-
+  // The travelling bottle runs on ALL devices (desktop + mobile). It reads
+  // window.scrollY live every frame via gsap.ticker, so it tracks native mobile
+  // scroll just like it tracks Lenis on desktop — same animation everywhere.
   useEffect(() => {
-    if (isLoading || !isDesktop) return;
+    if (isLoading) return;
     const outer = outerRef.current;
     const rotator = rotatorRef.current;
     const img = imgRef.current;
@@ -190,9 +186,7 @@ export default function TravelingBottle({ isLoading }: { isLoading: boolean }) {
       window.clearTimeout(t2);
       ctx.revert();
     };
-  }, [isLoading, isDesktop]);
-
-  if (!isDesktop) return null;
+  }, [isLoading]);
 
   return (
     <div

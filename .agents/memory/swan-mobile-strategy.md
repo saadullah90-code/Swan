@@ -1,34 +1,31 @@
 ---
 name: SWAN mobile responsiveness strategy
-description: How the heavy scroll-choreography (Lenis + travelling bottle) is disabled on touch/mobile and replaced with static content, and why the JS gate must match the CSS gate.
+description: How the signature scroll choreography behaves on touch/mobile — the travelling bottle runs everywhere, Lenis smooth-scroll is desktop-only.
 ---
 
 # SWAN mobile strategy
 
-The signature scroll choreography (Lenis smooth-scroll + the single per-frame fixed
-TravelingBottle) is **desktop/mouse-only**. On touch devices it caused jank and a
-"bottle jumps around" glitch, because a fixed per-frame element jumps whenever the
-mobile browser's address bar resizes the viewport, and `backdrop-filter` blur repaints
-every scroll frame.
+The signature travelling serum bottle (single fixed element that glides between
+`[data-bottle-slot]` markers as you scroll) runs on **ALL devices**, desktop and
+mobile. **Why:** the user explicitly wanted the desktop bottle animation to work
+"same to same" on mobile.
 
-**Gate:** `DESKTOP_MQ = '(min-width: 768px) and (pointer: fine)'` (in `src/lib/useIsDesktop.ts`).
-Width-only is NOT enough — landscape phones/tablets exceed 768px but must still get the
-mobile experience, so the `pointer: fine` clause is required.
+**How it works cross-device:** the bottle recomputes its position every frame from
+`window.scrollY` + the live `getBoundingClientRect` of each slot, driven by
+`gsap.ticker` (which runs its own RAF loop independent of Lenis). So it tracks native
+mobile scroll exactly as it tracks Lenis smooth-scroll on desktop — no gating needed.
 
-**Rules:**
-- `SmoothScroll` and `TravelingBottle` both gate on `useIsDesktop()` and react to media
-  changes (init/destroy Lenis, mount/unmount bottle) — not mount-only.
-- Each `[data-bottle-slot]` marker stays in the DOM always (the desktop bottle reads
-  their live rects). On non-desktop, a static `<img>` bottle is shown inside/near each
-  slot and the empty collection-middle marker collapses.
-- **Static-image visibility is driven by CSS classes `.slot-static` / `.slot-marker`
-  whose media query is kept byte-identical to `DESKTOP_MQ`.** Do NOT use Tailwind
-  `md:hidden`/`hidden md:block` for this — `md:` is width-only and would drift from the
-  pointer-based JS gate, leaving slots empty on wide touch devices.
+**Lenis smooth-scroll is still desktop-only** (`SmoothScroll` gates on
+`useIsDesktop()` / `DESKTOP_MQ = '(min-width:768px) and (pointer:fine)'`). On touch it
+fought native scrolling and felt janky. The bottle does NOT depend on Lenis, so this
+split is fine.
 
-**Why:** any divergence between the JS gate (which controls whether the travelling
-bottle renders) and the CSS gate (which controls whether static bottles show) produces
-either empty slots or double bottles. Keep them in lockstep.
+**Static per-slot fallback bottles are OFF everywhere.** The CSS helpers
+`.slot-static { display:none }` / `.slot-marker { display:block }` (in `index.css`) are
+now unconditional — there was a period when static bottles replaced the travelling one
+on mobile; that was reverted. Do NOT re-introduce static-vs-travelling gating unless the
+requirement changes again. Every `[data-bottle-slot]` marker must stay laid out and
+non-zero-size on every breakpoint (a collapsed slot rect shrinks the bottle toward 0).
 
-**Also:** `backdrop-filter` is capped to `blur(8px)` under `@media (pointer: coarse)`
-to relieve mobile GPUs.
+**Also:** `backdrop-filter` capped to `blur(8px)` under `@media (pointer: coarse)` to
+relieve mobile GPUs — keep this.
