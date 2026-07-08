@@ -39,7 +39,7 @@ export default function Home() {
         <Preloader isLoading={isLoading} setIsLoading={setIsLoading} />
         
         <div 
-          className="relative z-10 transition-opacity duration-1000" 
+          className="relative z-10 transition-opacity duration-500" 
           style={{ opacity: isLoading ? 0 : 1 }}
         >
           <Header />

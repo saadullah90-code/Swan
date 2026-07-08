@@ -24,8 +24,8 @@ export default function Preloader({ isLoading, setIsLoading }: PreloaderProps) {
       const counter = { value: 0 };
       gsap.to(counter, {
         value: 100,
-        duration: 2,
-        ease: 'power3.inOut',
+        duration: 1,
+        ease: 'power2.inOut',
         onUpdate: () => {
           if (counterRef.current) {
             counterRef.current.textContent = Math.round(counter.value).toString() + '%';
@@ -38,20 +38,20 @@ export default function Preloader({ isLoading, setIsLoading }: PreloaderProps) {
             }
           });
           
-          tl.to(counterRef.current, { opacity: 0, duration: 0.5 })
-            .to(logoRef.current, { scale: 1.1, opacity: 0, duration: 0.8, ease: 'power2.inOut' }, "<")
+          tl.to(counterRef.current, { opacity: 0, duration: 0.3 })
+            .to(logoRef.current, { scale: 1.1, opacity: 0, duration: 0.5, ease: 'power2.inOut' }, "<")
             .to(containerRef.current, { 
               yPercent: -100, 
-              duration: 1.2, 
+              duration: 0.7, 
               ease: 'power4.inOut' 
-            }, "-=0.4");
+            }, "-=0.3");
         }
       });
 
       // Logo pulse
       gsap.fromTo(logoRef.current, 
         { opacity: 0, scale: 0.9, filter: 'blur(10px)' },
-        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power2.out' }
+        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.7, ease: 'power2.out' }
       );
     }, containerRef);
 
