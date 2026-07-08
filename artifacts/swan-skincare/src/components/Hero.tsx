@@ -93,17 +93,22 @@ export default function Hero({ isLoading }: { isLoading: boolean }) {
         <div className="absolute bottom-[-12%] left-[30%] w-[48vw] h-[48vw] rounded-full bg-[hsl(var(--c-peach)/0.20)] blur-[140px]" />
       </div>
 
-      {/* Giant background word — now prominent */}
-      <div
-        ref={bgWordRef}
-        data-hero-bgword
-        className="absolute top-[15%] left-1/2 -translate-x-1/2 text-[26vw] md:text-[21vw] font-display font-bold leading-none whitespace-nowrap z-0 pointer-events-none select-none"
-        style={{
-          color: 'hsl(var(--luxury) / 0.07)',
-          WebkitTextStroke: '2px hsl(var(--luxury) / 0.20)',
-        }}
-      >
-        SERUM
+      {/* Giant background word — now prominent.
+          Centering lives on the outer wrapper; GSAP only transforms the inner
+          element so its parallax/entrance transforms never fight the -50% centering
+          (that conflict made the word jump to the right on scroll). */}
+      <div className="absolute top-[15%] left-1/2 -translate-x-1/2 z-0 pointer-events-none select-none">
+        <div
+          ref={bgWordRef}
+          data-hero-bgword
+          className="text-[26vw] md:text-[21vw] font-display font-bold leading-none whitespace-nowrap"
+          style={{
+            color: 'hsl(var(--luxury) / 0.07)',
+            WebkitTextStroke: '2px hsl(var(--luxury) / 0.20)',
+          }}
+        >
+          SERUM
+        </div>
       </div>
 
       {/* Ingredient chips — left rail (desktop) */}
