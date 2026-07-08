@@ -4,7 +4,8 @@ import { X, Plus, Minus, Trash2 } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
 
 export default function CartDrawer() {
-  const { isOpen, items, toggleCart, updateQuantity, removeItem, total } = useCartStore();
+  const { isOpen, items, toggleCart, updateQuantity, removeItem } = useCartStore();
+  const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <AnimatePresence>

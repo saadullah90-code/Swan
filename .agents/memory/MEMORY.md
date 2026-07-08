@@ -2,3 +2,4 @@
 - [SWAN header/logo contrast](swan-header-logo.md) — the rose-gold swan logo is low-contrast on the light theme; keep it on a dark surface (wine-tinted pill) so it reads.
 - [Vercel/external builds](vercel-external-build.md) — swan-skincare: vite.config falls back on missing PORT/BASE_PATH; root vercel.json + SPA rewrites; import WebP not multi-MB PNGs.
 - [SWAN mobile strategy](swan-mobile-strategy.md) — Lenis runs on all devices (sync-touch) so the per-frame bottle stays in phase on mobile; cache vh vs address-bar jumps; lighten filters on touch.
+- [Zustand derived state](zustand-derived-state.md) — never use getters on zustand state; they flatten to a static value on merge. Compute in component/selector.
